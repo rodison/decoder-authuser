@@ -25,6 +25,9 @@ public class AuthenticationController {
 
     @PostMapping("/signup")
     public ResponseEntity<Object> registerUser(@RequestBody @JsonView(UserDto.UserView.RegistrationPost.class) UserDto userDto) {
+        if (userDto == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: userDto cant be null!");
+        }
         if (userService.existsByUsername(userDto.getUsername())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: Username is already taken!");
         }
@@ -39,13 +42,5 @@ public class AuthenticationController {
         userModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
         userService.save(userModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(userModel);
-    }
-
-    public UserService getUserService() {
-        return userService;
-    }
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
     }
 }
