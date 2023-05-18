@@ -1,8 +1,11 @@
 server:
-  port: 8087
+  port: 80
 
 spring:
   datasource:
+#    url: jdbc:postgresql://eadauthuser.cau7apdyt9pp.us-east-2.rds.amazonaws.com:5432/eadauthuser
+#    username: postgres
+#    password: Pr1me1r0Banc0
     url: jdbc:postgresql://172.18.58.79:5432/ead-authuser
     username: ead-authuser
     password: ead-authuser
